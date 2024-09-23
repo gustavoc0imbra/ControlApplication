@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cadastro de Posts</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
+<div class="flex h-screen w-full items-center justify-center bg-gray-300">
+    <form class="just flex h-3/4 w-3/4 flex-col items-center gap-5 bg-white p-2" th:object="${employee}" th:action="@{/save}" method="POST">
+        <div class="flex h-10 w-full items-center justify-center bg-green-500 text-center font-bold text-white">Cadastro de Funcionário</div>
+        <label for="CPF" class="self-start">C.P.F.:</label>
+        <input class="w-full" type="text" id="CPF" placeholder="Insira o cpf do funcionário" th:field="*{CPF}" required />
+        <label for="name" class="self-start">Nome:</label>
+        <input class="w-full" type="text" id="name" th:field="*{name}" placeholder="Insira o nome do funcionário" maxlength="150" required />
+        <div class="text-red-500 self-start" th:if="${#fields.hasErrors('name')}" th:text="${#fields.errors('name')}"></div>
+        <label for="wage" class="self-start">Salário:</label>
+        <input class="w-full" type="number" id="wage" th:field="*{wage}" placeholder="Insira o salário" required />
+        <div class="text-red-500 self-start" th:if="${#fields.hasErrors('wage')}" th:text="${#fields.errors('wage')}"></div>
+        <div class="flex gap-5 self-end">
+            <a th:href="@{/}" class="rounded bg-red-400 p-2 text-white hover:bg-red-500">Cancelar</a>
+            <button class="rounded bg-green-500 p-2 text-white hover:bg-green-600">Salvar</button>
+        </div>
+    </form>
+</div>
+</body>
+</html>

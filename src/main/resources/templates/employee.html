@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Funcionário</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
+<div class="h-screen w-full bg-gray-300 p-5">
+    <table class="table w-full border-collapse">
+        <caption class="caption-top">
+            <span>Funcionários cadastrados: <span th:text="${#lists.size(employees)}"></span></span>
+            <a th:href="@{/add}"><button class="bg-green-400 p-2 hover:bg-green-500 hover:cursor-pointer text-white">Adicionar</button></a>
+        </caption>
+        <thead class="h-10 bg-green-500 text-center text-white">
+        <tr>
+            <th>C.P.F</th>
+            <th>Nome</th>
+            <th>Salário</th>
+            <th>Editar/Deletar</th>
+        </tr>
+        </thead>
+        <tbody class="bg-white">
+        <tr th:each="employee : ${employees}">
+            <td th:text="${employee.CPF}"></td>
+            <td th:text="${employee.name}"></td>
+            <td class="text-right" th:text="${employee.wage}"></td>
+            <td class="flex justify-end gap-5">
+                <a id="edit-btn" class="bg-yellow-400 p-1 text-white" th:href="@{/edit/{id}(id=${employee.CPF})}">Editar</a>
+                <a class="bg-red-500 p-1 text-white" th:href="@{/delete/{id}(id=${employee.CPF})}" onclick="confirmDelete(event)">&Chi; Deletar</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <a th:href="@{/contaDoMes}"><button class="bg-green-400 p-2 hover:bg-green-500 hover:cursor-pointer text-white">Ver Contas do Mês</button></a>
+</div>
+<script>
+    function confirmDelete(event) {
+        if(!confirm("Deseja realmente deletar este funcionário?")) {
+            event.preventDefault();
+        }
+    }
+</script>
+</body>
+</html>

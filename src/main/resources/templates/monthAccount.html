@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Conta do Mês</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
+<div class="h-screen w-full bg-gray-300 p-5">
+    <table class="table w-full border-collapse">
+        <caption class="caption-top">
+            <span>Contas do mês cadastradas: <span th:text="${#lists.size(monthaccounts)}"></span></span>
+            <a th:href="@{/contaDoMes/add}"><button class="bg-green-400 p-2 hover:bg-green-500 hover:cursor-pointer text-white">Adicionar</button></a>
+        </caption>
+        <thead class="h-10 bg-green-500 text-center text-white">
+        <tr>
+            <th>Id</th>
+            <th>Descrição</th>
+            <th>Valor</th>
+            <th>Data de Cadastro</th>
+            <th>Editar/Deletar</th>
+        </tr>
+        </thead>
+        <tbody class="bg-white">
+        <tr th:each="monthAcc : ${monthaccounts}">
+            <td th:text="${monthAcc.id}"></td>
+            <td th:text="${monthAcc.description}"></td>
+            <td class="text-right" th:text="${monthAcc.valores}"></td>
+            <td class="text-center" th:text="${#dates.format(monthAcc.createdAt, 'dd/MM/yyyy')}"></td>
+            <td class="flex justify-end gap-5">
+                <a id="edit-btn" class="bg-yellow-400 p-1 text-white" th:href="@{/contaDoMes/edit/{id}(id=${monthAcc.id})}">Editar</a>
+                <a class="bg-red-500 p-1 text-white" th:href="@{/contaDoMes/delete/{id}(id=${monthAcc.id})}" onclick="confirmDelete(event)">&Chi; Deletar</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <a th:href="@{/}"><button class="bg-green-400 p-2 hover:bg-green-500 hover:cursor-pointer text-white">Ver Funcionários</button></a>
+</div>
+<script>
+    function confirmDelete(event) {
+        if(!confirm("Deseja realmente deletar esta conta do mês?")) {
+            event.preventDefault();
+        }
+    }
+</script>
+</body>
+</html>

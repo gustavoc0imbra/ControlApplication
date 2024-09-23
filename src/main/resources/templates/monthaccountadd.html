@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cadastro de Conta do Mês</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
+<div class="flex h-screen w-full items-center justify-center bg-gray-300">
+    <form class="just flex h-3/4 w-3/4 flex-col items-center gap-5 bg-white p-2" th:object="${monthaccount}" th:action="@{/contaDoMes/save}" method="POST">
+        <div class="flex h-10 w-full items-center justify-center bg-green-500 text-center font-bold text-white">Adicionar Conta do Mês</div>
+        <label for="id" class="self-start">Id:</label>
+        <input class="w-full" type="text" id="id" th:field="*{id}" readonly />
+        <label for="description" class="self-start">Descrição:</label>
+        <input class="w-full" type="text" id="description" th:field="*{description}" placeholder="Descreva a conta do mês" maxlength="150" required />
+        <div class="text-red-500 self-start" th:if="${#fields.hasErrors('description')}" th:text="${#fields.errors('description')}"></div>
+        <label for="valor" class="self-start">Valor:</label>
+        <input class="w-full" type="number" id="valor" th:field="*{valores}" placeholder="Insira o valor do serviço" required />
+        <div class="text-red-500 self-start" th:if="${#fields.hasErrors('valores')}" th:text="${#fields.errors('valores')}"></div>
+        <label for="createdAt" class="self-start">Data de cadastro:</label>
+        <input class="w-full" type="date" id="createdAt" th:field="*{createdAt}" required readonly/>
+        <div class="text-red-500 self-start" th:if="${#fields.hasErrors('createdAt')}" th:text="${#fields.errors('createdAt')}"></div>
+        <div class="flex gap-5 self-end">
+            <a th:href="@{/contaDoMes}" class="rounded bg-red-400 p-2 text-white hover:bg-red-500">Cancelar</a>
+            <button class="rounded bg-green-500 p-2 text-white hover:bg-green-600">Salvar</button>
+        </div>
+    </form>
+</div>
+</body>
+</html>

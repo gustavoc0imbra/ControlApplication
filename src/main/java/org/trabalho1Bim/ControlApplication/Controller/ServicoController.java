@@ -33,5 +33,10 @@ public class ServicoController {
         return servicoService.findOne(id);
     }
 
-    
+    @CrossOrigin
+    @DeleteMapping(ENDPOINT+"/{id}")
+    public void delete(@RequestParam Long id)
+    {
+        servicoService.delete(id);
+    }
 }

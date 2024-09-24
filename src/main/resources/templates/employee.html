@@ -8,7 +8,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body>
-<div class="h-screen w-full bg-gray-300 p-5">
+<div class="h-screen w-full flex flex-col justify-center items-center bg-gray-300 p-5">
     <table class="table w-full border-collapse">
         <caption class="caption-top">
             <span>Funcionários cadastrados: <span th:text="${#lists.size(employees)}"></span></span>
@@ -34,7 +34,8 @@
         </tr>
         </tbody>
     </table>
-    <a th:href="@{/contaDoMes}"><button class="bg-green-400 p-2 hover:bg-green-500 hover:cursor-pointer text-white">Ver Contas do Mês</button></a>
+    <br>
+    <a th:href="@{/contaDoMes}"><button class="bg-blue-500 p-2 hover:bg-blue-600 hover:cursor-pointer text-white">Ver Contas do Mês</button></a>
 </div>
 <script>
     function confirmDelete(event) {
